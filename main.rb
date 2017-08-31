@@ -3,7 +3,8 @@ if ENV['RACK_ENV'] != 'production'
 end
 
 require 'sinatra'
+require 'json'
 
 get '/' do
-  "Hello World!"
+  "#{request.ip}".to_json
 end
