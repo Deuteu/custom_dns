@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913224535) do
+ActiveRecord::Schema.define(version: 20170920193900) do
 
   create_table "dns_records", force: :cascade do |t|
     t.string "cloudflare_dns_id"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 20170913224535) do
     t.string "cloudflare_dns_name"
     t.string "ping_token"
     t.index ["ping_token"], name: "index_dns_records_on_ping_token"
+  end
+
+  create_table "tg_users", force: :cascade do |t|
+    t.string "telegram_id"
+    t.boolean "is_bot"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "username"
+    t.string "language_code"
+    t.index ["telegram_id"], name: "index_tg_users_on_telegram_id"
   end
 
 end
