@@ -49,3 +49,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Telegram
 gem 'telegramAPI'
+
+# HTTParty for ping to API
+gem 'httparty'
