@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'application#home'
 
   post '/:token', to: 'telegram#webhook'
+  put  '/:token', to: 'application#ping'
 end
