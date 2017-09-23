@@ -4,6 +4,11 @@ class ApplicationController < ActionController::API
   end
 
   def ping
+    unless params[:token] ==  ENV['PING_TOKEN']
+      render status: :ok, nothing: true
+      return
+    end
+
     ip = request.remote_ip
 
     url = "#{ENV['CLOUDFLARE_API_BASE_URL']}/zones/#{ENV['CLOUDFLARE_ZONE_ID']}/dns_records/#{ENV['CLOUDFLARE_DNS_ID']}"
@@ -21,6 +26,6 @@ class ApplicationController < ActionController::API
 
     result = HTTParty.put(url, body: body, headers: headers)
 
-    result.parsed_response.to_json
+    render status: :ok, json: result.parsed_response
   end
 end
