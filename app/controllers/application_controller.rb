@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
       type: ENV['CLOUDFLARE_DNS_TYPE'],
       name: ENV['CLOUDFLARE_DNS_NAME'],
       content: ENV['RACK_ENV'] != 'production' ? "172.217.11.174" : "#{ip}",
-      proxied: true
+      # proxied: true # Removed cause do not allow ssh access
     }.to_json
     headers = {
       'X-Auth-Email': ENV['CLOUDFLARE_EMAIL'],
