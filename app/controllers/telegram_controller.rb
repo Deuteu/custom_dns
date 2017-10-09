@@ -1,4 +1,6 @@
 class TelegramController < ApplicationController
+  require 'telegram_command'
+
   def webhook
     unless params[:token] ==  ENV['TG_WEBHOOK_TOKEN']
       render status: :ok, nothing: true
@@ -34,6 +36,7 @@ class TelegramController < ApplicationController
     end
 
     puts "Message: #{message}"
+    process_command(message)
 
     # Return an empty json, to say "ok" to Telegram
     render status: :ok, json: {}
@@ -47,11 +50,7 @@ class TelegramController < ApplicationController
   end
 
   def process_command(tg_message)
-    text = tg_message['text']
-    white_space_split = text.split(' ')
-
-    command     = white_space_split.shift
-    sub_command = white_space_split.shift
-    args        = white_space_split.join(' ')
+    response = ::TelegramCommand.exec(tg_message['text'].split(' '))
+    TELEGRAM_CLIENT.sendMessage(tg_message['chat']['id'], response)
   end
 end
