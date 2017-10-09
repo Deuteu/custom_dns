@@ -20,8 +20,13 @@ class AbstractTelegramCommand
       'Unimplemented command'
     else
       sub = args.shift
-      if sub && @sub_commands[sub.to_sym]
-        @sub_commands[sub.to_sym].exec(args)
+      if sub
+        cmd = @sub_commands[sub.to_sym]
+        if cmd
+          cmd.exec(args)
+        else
+          "Unknown subcommand: #{sub}"
+        end
       else
         "Subcommands: #{sub_commands.keys.join(',')}"
       end
