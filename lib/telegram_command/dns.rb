@@ -1,6 +1,6 @@
-module TelegramCommand
-  class Dns < TelegramCommandStub
-    class List < TelegramCommandStub
+class TelegramCommand
+  class Dns < AbstractTelegramCommand
+    class List < AbstractTelegramCommand
     end
   end
 end

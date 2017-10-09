@@ -1,7 +1,4 @@
-module TelegramCommand
-end
-
-class TelegramCommandStub
+class AbstractTelegramCommand
   def self.command
     (self.name.split('::').last || self.name).underscore
   end
@@ -10,7 +7,7 @@ class TelegramCommandStub
   def self.sub_commands
     @sub_commands ||= self.constants.inject({}) do |hash, c|
       const = self.const_get(c)
-      if const.is_a?(Class) && const < TelegramCommandStub
+      if const.is_a?(Class) && const < AbstractTelegramCommand
         command              = const.command
         hash[command.to_sym] = const
       end
@@ -30,6 +27,9 @@ class TelegramCommandStub
       end
     end
   end
+end
+
+class TelegramCommand < AbstractTelegramCommand
 end
 
 Dir[Rails.root.join('lib', 'telegram_command', '*')].each {|file| require file }

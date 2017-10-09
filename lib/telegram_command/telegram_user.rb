@@ -1,4 +1,4 @@
-module TelegramCommand
-  class TelegramUser < TelegramCommandStub
+class TelegramCommand
+  class TelegramUser < AbstractTelegramCommand
   end
 end
