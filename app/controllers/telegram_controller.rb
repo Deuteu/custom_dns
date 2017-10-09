@@ -45,4 +45,13 @@ class TelegramController < ApplicationController
     admin_ids << ENV['TG_SUPER_ADMIN_ID'].to_s
     admin_ids.include?(user_id.to_s)
   end
+
+  def process_command(tg_message)
+    text = tg_message['text']
+    white_space_split = text.split(' ')
+
+    command     = white_space_split.shift
+    sub_command = white_space_split.shift
+    args        = white_space_split.join(' ')
+  end
 end
