@@ -9,7 +9,7 @@ class TelegramCommand
         'super'
       end
 
-      def self.exec
+      def self.exec(_args = [])
         'Dt'
       end
     end
