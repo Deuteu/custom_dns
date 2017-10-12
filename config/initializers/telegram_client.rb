@@ -2,7 +2,7 @@ require 'telegramAPI'
 
 TELEGRAM_CLIENT = TelegramAPI.new(ENV['TG_API_TOKEN'].to_s)
 
-unless defined?(Rails::Console) || defined?(Rails::Generators) || defined?(::Rake) || File.basename($0) == 'rake'
+unless defined?(Rails::Console) || defined?(Rails::Generators) || File.basename($0) == 'rake'
   # To enable dyno metadata
   # > heroku labs:enable runtime-dyno-metadata -a <app name>
   # https://devcenter.heroku.com/articles/dyno-metadata
