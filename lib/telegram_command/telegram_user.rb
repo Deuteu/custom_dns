@@ -36,10 +36,7 @@ class TelegramCommand
         result = "User list #{page}/#{page_count}"
 
         TgUser.page(page).per(limit).each do |user|
-          result += <<EOF
-
-#{user.to_s}
-EOF
+          result += "\n- #{user.to_s}"
         end
 
         result

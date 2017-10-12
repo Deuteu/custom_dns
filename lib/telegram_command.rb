@@ -21,6 +21,7 @@ class AbstractTelegramCommand
     else
       sub = args.shift
       if sub
+        sub.downcase!
         cmd = @sub_commands[sub.to_sym]
         if cmd
           cmd.exec(args, options)
@@ -41,6 +42,7 @@ class TelegramCommand < AbstractTelegramCommand
     else
       sub = args.shift
       if sub
+        sub.downcase!
         cmd = @sub_commands[sub.to_sym]
         if cmd
           return cmd.exec(args, options)
