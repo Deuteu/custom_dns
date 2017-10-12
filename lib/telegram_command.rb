@@ -15,7 +15,7 @@ class AbstractTelegramCommand
     end
   end
 
-  def self.exec(args = [])
+  def self.exec(args = [], options = {})
     if self.sub_commands.blank?
       'Unimplemented command'
     else
@@ -23,18 +23,32 @@ class AbstractTelegramCommand
       if sub
         cmd = @sub_commands[sub.to_sym]
         if cmd
-          cmd.exec(args)
+          cmd.exec(args, options)
         else
           "Unknown subcommand: #{sub}"
         end
       else
-        "Subcommands: #{sub_commands.keys.join(',')}"
+        "Available subcommands: #{sub_commands.keys.join(',')}"
       end
     end
   end
 end
 
 class TelegramCommand < AbstractTelegramCommand
+  def self.exec(args = [], options = {})
+    if self.sub_commands.blank?
+      'Nothing to do here. Sorry.'
+    else
+      sub = args.shift
+      if sub
+        cmd = @sub_commands[sub.to_sym]
+        if cmd
+          return cmd.exec(args, options)
+        end
+      end
+      "Available commands: #{sub_commands.keys.join(',')}"
+    end
+  end
 end
 
 Dir[Rails.root.join('lib', 'telegram_command', '*')].each {|file| require file }
