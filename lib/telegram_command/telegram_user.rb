@@ -26,13 +26,13 @@ class TelegramCommand
           limit = limit_arg > 0 && limit_arg < 10 ? limit_arg : limit
         end
 
+        page_count = TgUser.page(1).per(limit).total_pages
         page = 1
         if args.second
           page_arg = args.second.to_i
-          page = page_arg > 0 ? page_arg : page
+          page = page_arg > 0 && page_arg <= page_count ? page_arg : page
         end
 
-        page_count = TgUser.page(page).per(limit).total_pages
         result = "User list #{page}/#{page_count}"
 
         TgUser.page(page).per(limit).each do |user|
