@@ -52,3 +52,6 @@ gem 'telegramAPI'
 
 # HTTParty for ping to API
 gem 'httparty'
+
+# Pagination
+gem 'kaminari'
