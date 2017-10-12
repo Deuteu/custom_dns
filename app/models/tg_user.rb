@@ -1,0 +1,2 @@
+class TgUser < ApplicationRecord
+end
