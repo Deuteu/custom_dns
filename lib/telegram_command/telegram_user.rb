@@ -28,7 +28,7 @@ class TelegramCommand
 
         page = 1
         if args.second
-          page_arg = args.second
+          page_arg = args.second.to_i
           page = page_arg > 0 ? page_arg : page
         end
 
