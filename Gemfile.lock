@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/Deuteu/jaredt.git
+  revision: 6522f957ae2be97a609ace668b88e0cb137b432a
+  specs:
+    jaredt (0.0.0)
+      rails (>= 4, < 6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -153,6 +160,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   httparty
+  jaredt!
   kaminari
   listen (>= 3.0.5, < 3.2)
   pg

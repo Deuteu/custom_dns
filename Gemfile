@@ -53,5 +53,8 @@ gem 'telegramAPI'
 # HTTParty for ping to API
 gem 'httparty'
 
+# Wake up dyno
+gem 'jaredt', git: 'https://github.com/Deuteu/jaredt.git'
+
 # Pagination
 gem 'kaminari'
