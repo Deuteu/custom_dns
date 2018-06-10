@@ -1,6 +1,6 @@
-class TelegramController < ApplicationController
-  require 'telegram_command'
+require 'telegram_command'
 
+class TelegramController < ApplicationController
   def webhook
     unless params[:token] ==  ENV['TG_WEBHOOK_TOKEN']
       render status: :ok, nothing: true
@@ -8,14 +8,14 @@ class TelegramController < ApplicationController
     end
 
     unless params[:message]
-      puts "MissingArgs - No message: #{params}"
+      Rails.logger.info "MissingArgs - No message: #{params}"
       render status: :ok, json: {}
       return
     end
     message = params[:message]
 
     unless message['chat'] && message['chat']['id']
-      puts "MissingArgs - No chat id for response: #{params}"
+      Rails.logger.info "MissingArgs - No chat id for response: #{params}"
       render status: :ok, json: {}
       return
     end
@@ -23,19 +23,19 @@ class TelegramController < ApplicationController
 
     from = message['from']
     unless is_admin?(from['id'])
-      puts "NotAdmin - Message by not admin user: #{from}"
+      Rails.logger.info "NotAdmin - Message by not admin user: #{from}"
       TELEGRAM_CLIENT.sendMessage(chat_id, 'My mum told me not to talk to stranger.')
       render status: :ok, json: {}
       return
     end
 
     unless message['text']
-      puts "EmptyMessage - Message with no text: #{message}"
+      Rails.logger.info "EmptyMessage - Message with no text: #{message}"
       render status: :ok, json: {}
       return
     end
 
-    puts "Message: #{message}"
+    Rails.logger.info "Message: #{message}"
     process_command(message)
 
     # Return an empty json, to say "ok" to Telegram
@@ -43,6 +43,7 @@ class TelegramController < ApplicationController
   end
 
   private
+
   def is_admin?(user_id)
     admin_ids = ENV['TG_ADMIN_IDS'].to_s.split(';')
     admin_ids << ENV['TG_SUPER_ADMIN_ID'].to_s
