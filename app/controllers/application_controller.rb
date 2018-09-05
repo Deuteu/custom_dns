@@ -19,9 +19,9 @@ class ApplicationController < ActionController::API
       # proxied: true # Removed cause do not allow ssh access
     }.to_json
     headers = {
-      'X-Auth-Email': ENV['CLOUDFLARE_EMAIL'],
-      'X-Auth-Key': ENV['CLOUDFLARE_API_TOKEN'],
-      'Content-Type': 'application/json'
+      'X-Auth-Email' => ENV['CLOUDFLARE_EMAIL'],
+      'X-Auth-Key' => ENV['CLOUDFLARE_API_TOKEN'],
+      'Content-Type' => 'application/json'
     }
 
     result = HTTParty.put(url, body: body, headers: headers)
