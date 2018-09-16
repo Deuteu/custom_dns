@@ -1,0 +1,50 @@
+AllCops:
+  Exclude:
+    - bin/*
+    - config/application.rb
+    - config/initializers/kaminari_config.rb
+    - config/puma.rb
+    - config/spring.rb
+    - db/schema.rb
+    - Gemfile
+    - test/test_helper.rb
+    - vendor/**/*
+
+Metrics/AbcSize:
+  Exclude:
+    - app/controllers/application_controller.rb
+    - app/controllers/telegram_controller.rb
+    - lib/telegram_command/telegram_user.rb
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - app/controllers/telegram_controller.rb
+    - lib/telegram_command/telegram_user.rb
+Metrics/LineLength:
+  Max: 140
+Metrics/MethodLength:
+  Max: 30
+  Exclude:
+    - app/controllers/telegram_controller.rb
+Layout/SpaceInsideBlockBraces:
+  Exclude:
+    - lib/telegram_command.rb
+Lint/StringConversionInInterpolation:
+  Exclude:
+    - lib/telegram_command/telegram_user.rb
+Lint/DuplicateMethods:
+  Exclude:
+    - lib/telegram_command.rb
+Style/Documentation:
+  Enabled: false
+Style/EachWithObject:
+  Exclude:
+    - lib/telegram_command.rb
+Style/IfUnlessModifier:
+  Exclude:
+    - lib/telegram_command.rb
+Style/RedundantSelf:
+  Exclude:
+    - lib/telegram_command.rb
+Style/SpecialGlobalVars:
+  Exclude:
+    - config/initializers/telegram_client.rb
