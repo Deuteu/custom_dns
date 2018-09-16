@@ -12,7 +12,7 @@ gem 'rails', '~> 5.1.1'
 group :development, :test do
   gem 'sqlite3'
 end
-group :production do
+group :production, :test do
   gem 'pg'
 end
 
