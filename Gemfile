@@ -58,3 +58,7 @@ gem 'jaredt', git: 'https://github.com/Deuteu/jaredt.git'
 
 # Pagination
 gem 'kaminari'
+
+group :test do
+  gem 'rspec-rails'
+end
