@@ -16,12 +16,15 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
-          name: install dependencies
+          name: Install dependencies
           command: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Guideline style check
+          command: bundle exec rubocop
       - run:
           name: Database setup
           command: |
@@ -29,7 +32,7 @@ jobs:
             bundle exec rake db:schema:load
       # Run tests
       - run:
-          name: run tests
+          name: Tests
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
