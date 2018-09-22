@@ -5,8 +5,6 @@ Telegram.configure do |c|
   c.webhook_token  = ENV['TG_WEBHOOK_TOKEN']
 end
 
-TELEGRAM_CLIENT = Telegram.client
-
 unless defined?(Rails::Console) || defined?(Rails::Generators) || File.basename($0) == 'rake'
   # To enable dyno metadata
   # > heroku labs:enable runtime-dyno-metadata -a <app name>
