@@ -34,6 +34,8 @@ Lint/StringConversionInInterpolation:
 Lint/DuplicateMethods:
   Exclude:
     - lib/telegram_command.rb
+Lint/Void:
+  Enabled: false
 Style/Documentation:
   Enabled: false
 Style/EachWithObject:
