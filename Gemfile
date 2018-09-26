@@ -61,6 +61,10 @@ gem 'kaminari'
 
 group :test do
   gem 'rspec-rails'
+  gem 'dotenv-rails'
+  gem 'webmock'
+
   gem 'rspec_junit_formatter'
+
   gem 'rubocop'
 end
