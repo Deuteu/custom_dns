@@ -1,6 +1,8 @@
 require 'telegram_command'
 
 class TelegramController < ApplicationController
+  NOT_ADMIN_MESSAGE = 'My mum told me not to talk to stranger.'.freeze
+
   def webhook
     unless params[:token] == Telegram.webhook_token
       render status: :ok, nothing: true
@@ -24,7 +26,7 @@ class TelegramController < ApplicationController
     from = message['from']
     unless Telegram.admin?(from['id'])
       Rails.logger.info "NotAdmin - Message by not admin user: #{from}"
-      Telegram.client.sendMessage(chat_id, 'My mum told me not to talk to stranger.')
+      Telegram.client.sendMessage(chat_id, NOT_ADMIN_MESSAGE)
       render status: :ok, json: {}
       return
     end
