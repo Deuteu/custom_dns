@@ -7,7 +7,7 @@ module Telegram
     delegate :admin_ids, :api_token, :super_admin_id, :webhook_token, to: :configuration
 
     def admin?(user_id)
-      @all_admin_ids.include?(user_id.to_i)
+      user_id.present? && @all_admin_ids.include?(user_id.to_i)
     end
 
     def client

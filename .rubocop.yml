@@ -7,6 +7,7 @@ AllCops:
     - config/spring.rb
     - db/schema.rb
     - Gemfile
+    - spec/*_helper.rb
     - test/test_helper.rb
     - vendor/**/*
 
@@ -15,6 +16,9 @@ Metrics/AbcSize:
     - app/controllers/application_controller.rb
     - app/controllers/telegram_controller.rb
     - lib/telegram_command/telegram_user.rb
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb
 Metrics/CyclomaticComplexity:
   Exclude:
     - app/controllers/telegram_controller.rb
@@ -25,9 +29,13 @@ Metrics/MethodLength:
   Max: 30
   Exclude:
     - app/controllers/telegram_controller.rb
+Layout/DotPosition:
+  EnforcedStyle: trailing
 Layout/SpaceInsideBlockBraces:
   Exclude:
     - lib/telegram_command.rb
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
 Lint/StringConversionInInterpolation:
   Exclude:
     - lib/telegram_command/telegram_user.rb
