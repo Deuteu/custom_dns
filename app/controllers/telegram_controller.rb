@@ -1,8 +1,10 @@
 require 'telegram_command'
 
 class TelegramController < ApplicationController
+  NOT_ADMIN_MESSAGE = 'My mum told me not to talk to stranger.'.freeze
+
   def webhook
-    unless params[:token] ==  ENV['TG_WEBHOOK_TOKEN']
+    unless params[:token] == Telegram.webhook_token
       render status: :ok, nothing: true
       return
     end
@@ -22,9 +24,9 @@ class TelegramController < ApplicationController
     chat_id = message['chat']['id']
 
     from = message['from']
-    unless is_admin?(from['id'])
+    unless Telegram.admin?(from['id'])
       Rails.logger.info "NotAdmin - Message by not admin user: #{from}"
-      TELEGRAM_CLIENT.sendMessage(chat_id, 'My mum told me not to talk to stranger.')
+      Telegram.client.sendMessage(chat_id, NOT_ADMIN_MESSAGE)
       render status: :ok, json: {}
       return
     end
@@ -44,14 +46,8 @@ class TelegramController < ApplicationController
 
   private
 
-  def is_admin?(user_id)
-    admin_ids = ENV['TG_ADMIN_IDS'].to_s.split(';')
-    admin_ids << ENV['TG_SUPER_ADMIN_ID'].to_s
-    admin_ids.include?(user_id.to_s)
-  end
-
   def process_command(tg_message)
     response = ::TelegramCommand.exec(tg_message['text'].split(' '))
-    TELEGRAM_CLIENT.sendMessage(tg_message['chat']['id'], response)
+    Telegram.client.sendMessage(tg_message['chat']['id'], response)
   end
 end
