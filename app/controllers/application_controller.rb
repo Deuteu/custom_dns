@@ -13,7 +13,7 @@ class ApplicationController < ActionController::API
     body = {
       type: ENV['CLOUDFLARE_DNS_TYPE'],
       name: ENV['CLOUDFLARE_DNS_NAME'],
-      content: ENV['RACK_ENV'] != 'production' ? '172.217.11.174' : request.remote_ip.to_s,
+      content: ENV['RACK_ENV'] != 'production' ? '172.217.11.174' : request.remote_ip.to_s
       # proxied: true # Removed cause do not allow ssh access
     }.to_json
     headers = {
