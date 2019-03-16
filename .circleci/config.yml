@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.5.1-node-browsers
+        environment:
+          RAILS_ENV: test
       - image: circleci/postgres:9.4
         environment:
           POSTGRES_USER: pguser
